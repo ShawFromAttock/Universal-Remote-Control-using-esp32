@@ -1,0 +1,728 @@
+/*::-webkit-
+{
+    user-select: none;
+}*/
+
+@media only screen and (min-width: 500px) 
+{
+    html
+    {
+        width: 100%;
+        height: 100%;
+    }
+
+    .body-window
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+        font-family: "Open Sans", sans-serif;
+        background-color: ivory;
+        /*background-image: linear-gradient(to bottom, #e66465, #9198e5);*/
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .root-window
+    {
+        /*width: 23vw;
+        height: 90vh;*/
+        width: 25%;
+        height: 90%;
+        margin: auto;
+    }
+}
+
+@media only screen and (max-width: 499px) 
+{
+    html
+    {
+        width: 100%;
+        height: 100%;
+    }
+
+    .body-window
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+        font-family: "Open Sans", sans-serif;
+        background-color: ivory;
+        /*background-image: linear-gradient(to bottom, #054a67, #036b53);*/
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .root-window
+    {
+        /*width: 95vw;
+        height: 90vh;*/
+        width: 95%;
+        height: 95%;
+        margin: auto;
+    }
+}
+
+.initial-page-window
+{
+    width: 100%;
+    height: 100%;
+}
+
+.title-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+}
+
+.title-text-large
+{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.title-text-small
+{
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.vector-remote-image-window
+{
+    width: 100%;
+    height: 60%;
+}
+
+.vector-remote-image
+{
+    width: 100%;
+    /*height: 75%; Height is not specified to maintain the aspect ratio*/
+    opacity: 0.3;
+}
+
+.initial-page-buttons-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 30%;
+}
+
+.initial-page-buttons
+{
+    color: black;
+    background-color:  rgb(255, 255, 200);
+    border-color: rgb(185, 85, 85);
+    font-size: 1rem;
+    font-weight: bold;
+    touch-action: manipulation;
+    border-width: 2px;
+    border-radius: 50px;
+    border-style: solid;
+    outline: none;
+    width: 100%;
+    height: 35%;   
+}
+
+@media (hover: hover) 
+{
+    .initial-page-buttons:hover
+    {
+        background-color: lightblue;
+    }
+}
+
+.initial-page-buttons:active 
+{
+    background-color: lightcoral;
+}
+
+.remote-selection-page-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.remote-selection-list-window
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+    width: 100%;
+    height: 60%;
+    overflow-y: scroll;
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+}
+
+.remote-selection-list
+{
+    text-align: center;
+    list-style-type: none;
+    margin: 0%;
+    padding: 0%;
+}
+
+.remote-selection-list-item
+{
+    /*color: ivory;*/
+    background-color: ivory;
+}
+
+@media (hover: hover) 
+{
+    .remote-selection-list-item:hover
+    {
+        background-color: lightblue;
+    }
+}
+
+.remote-selection-list-item:active 
+{
+    background-color: lightblue;
+}
+
+.remote-selection-page-buttons-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 30%;   
+}
+
+.remote-selection-page-buttons
+{
+    color: black;
+    background-color:  rgb(255, 255, 200);
+    border-color: rgb(185, 85, 85);
+    font-size: 1rem;
+    font-weight: bold;
+    touch-action: manipulation;
+    border-width: 2px;
+    border-radius: 50px;
+    border-style: solid;
+    outline: none;
+    width: 100%;
+    height: 35%;   
+}
+
+@media (hover: hover) 
+{
+    .remote-selection-page-buttons:hover
+    {
+        background-color: lightblue;
+    }
+}
+
+.remote-selection-page-buttons:active 
+{
+    background-color: lightcoral;
+}
+
+.remote-transmission-page-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.remote-transmission-status-window
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 25%;
+}
+
+.remote-transmission-remote-status-heading-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 45%;
+    height: 100%;
+}
+
+.remote-transmission-remote-status-heading
+{
+    color: darkblue;
+    text-align: right;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.remote-transmission-remote-status-values-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 45%;
+    height: 100%;
+}
+
+.remote-transmission-remote-status-values
+{
+    color: darkgreen;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.remote-buttons-window
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 50%;
+}
+
+.left-remote-buttons-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.right-remote-buttons-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.remote-transmission-buttons
+{
+    color: black;
+    background-color:  rgb(255, 255, 200);
+    border-color: rgb(185, 85, 85);
+    font-size: 1rem;
+    font-weight: bold;
+    touch-action: manipulation;
+    border-width: 2px;
+    border-radius: 50px;
+    border-style: solid;
+    outline: none;
+    width: 90%;
+    height: 23%;   
+}
+
+@media (hover: hover) 
+{
+    .remote-transmission-buttons:hover
+    {
+        background-color: lightblue;
+    }
+}
+
+.remote-transmission-buttons:active 
+{
+    background-color: lightcoral;
+}
+
+.remote-transmission-page-buttons-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 15%;   
+}
+
+.remote-transmission-page-buttons
+{
+    color: black;
+    background-color:  rgb(255, 255, 200);
+    border-color: rgb(185, 85, 85);
+    font-size: 1rem;
+    font-weight: bold;
+    touch-action: manipulation;
+    border-width: 2px;
+    border-radius: 50px;
+    border-style: solid;
+    outline: none;
+    width: 100%;
+    height: 70%; 
+}
+
+@media (hover: hover) 
+{
+    .remote-transmission-page-buttons:hover
+    {
+        background-color: lightblue;
+    }
+}
+
+.remote-transmission-page-buttons:active 
+{
+    background-color: lightcoral;
+}
+
+.new-remote-scanning-page-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.buttons-configuration-window
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 55%;
+}
+
+.left-buttons-configuration-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.right-buttons-configuration-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.single-button-configuration-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 25%;
+}
+
+.button-name-heading
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.6rem;
+    font-weight: bold;
+    width: 75%;
+    height: 20%;
+}
+
+.button-name-text-input
+{
+    text-align: center;
+    font-size: 0.5rem;
+    width: 75%;
+    height: 15%;
+}
+
+.command-heading-and-scan-button-window
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+}
+
+.command-heading
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.6rem;
+    font-weight: bold;
+    width: 50%;
+    height: 100%;
+}
+
+.command-scan-buttons
+{
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.5rem;
+    color: black;
+    background-color:  rgb(255, 255, 200);
+    border-color: rgb(185, 85, 85);
+    touch-action: manipulation;
+    border-width: 0.5px;
+    border-radius: 10px;
+    border-style: solid;
+    outline: none;
+    width: 25%;
+    height: 85%;
+}
+
+@media (hover: hover) 
+{
+    .command-scan-buttons:hover
+    {
+        background-color: lightblue;
+    }
+}
+
+.command-scan-buttons:active 
+{
+    background-color: lightcoral;
+}
+
+.command-text-input
+{
+    text-align: center;
+    font-size: 0.5rem;
+    width: 75%;
+    height: 15%;
+}
+
+.new-remote-protocol-window
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 5%;
+}
+
+.new-remote-protocol-heading-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 45%;
+    height: 100%;
+}
+
+.new-remote-protocol-heading
+{
+    color: darkblue;
+    text-align: right;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.new-remote-protocol-select-menu-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 45%;
+    height: 100%;
+}
+
+.new-remote-protocol-select-menu
+{
+    color: darkgreen;
+    font-size: 0.8rem;
+    width: 65%;
+    height: 50%;
+}
+
+.new-remote-scanning-page-buttons-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 30%;  
+}
+
+.new-remote-scanning-page-buttons
+{
+    color: black;
+    background-color:  rgb(255, 255, 200);
+    border-color: rgb(185, 85, 85);
+    font-size: 1rem;
+    font-weight: bold;
+    touch-action: manipulation;
+    border-width: 2px;
+    border-radius: 50px;
+    border-style: solid;
+    outline: none;
+    width: 100%;
+    height: 35%; 
+}
+
+@media (hover: hover) 
+{
+    .new-remote-scanning-page-buttons:hover
+    {
+        background-color: lightblue;
+    }
+}
+
+.new-remote-scanning-page-buttons:active 
+{
+    background-color: lightcoral;
+}
+
+.new-remote-saving-page-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.new-remote-information-window
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+}
+
+.new-remote-information-heading-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+    height: 100%;
+}
+
+.new-remote-information-heading
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center;
+    color: darkblue;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 100%;
+    height: 10%;
+}
+
+.new-remote-information-value-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    width: 45%;
+    height: 100%;
+}
+
+.new-remote-information-text-input-window
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+}
+
+.new-remote-information-text-input
+{
+    color: darkgreen;
+    text-align: center;
+    font-size: 1rem;
+    width: 100%;
+    height: 75%;
+}
+
+.empty-input-fields-status-alert-window
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    width: 100%;
+    height: 10%;
+}
+
+.new-remote-saving-page-buttons-window
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 30%;  
+}
+
+.new-remote-saving-page-buttons
+{
+    color: black;
+    background-color:  rgb(255, 255, 200);
+    border-color: rgb(185, 85, 85);
+    font-size: 1rem;
+    font-weight: bold;
+    touch-action: manipulation;
+    border-width: 2px;
+    border-radius: 50px;
+    border-style: solid;
+    outline: none;
+    width: 100%;
+    height: 35%; 
+}
+
+@media (hover: hover) 
+{
+    .new-remote-saving-page-buttons:hover
+    {
+        background-color: lightblue;
+    }
+}
+
+.new-remote-saving-page-buttons:active 
+{
+    background-color: lightcoral;
+}

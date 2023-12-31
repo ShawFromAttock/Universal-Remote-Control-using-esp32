@@ -1,0 +1,25 @@
+[
+    {
+        "remoteName": "(Test) Epson Projector",
+        "receiverName": "Epson Projector",
+        "protocolIR": "NEC",
+        "receiverAddress": "21891",
+        "buttons": 8,
+        "buttonOneName": "Power",
+        "buttonTwoName": "Left",
+        "buttonThreeName": "Volume +",
+        "buttonFourName": "Volume -",
+        "buttonFiveName": "OK",
+        "buttonSixName": "Right",
+        "buttonSevenName": "Up",
+        "buttonEightName": "Down",
+        "buttonOneCommand": "144",
+        "buttonTwoCommand": "179",
+        "buttonThreeCommand": "152",
+        "buttonFourCommand": "153",
+        "buttonFiveCommand": "133",
+        "buttonSixCommand": "177",
+        "buttonSevenCommand": "176",
+        "buttonEightCommand": "178"
+    }
+]

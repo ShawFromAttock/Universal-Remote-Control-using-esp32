@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta id="viewport" name="viewport"  content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>Universal Remote Control</title>
+    <link href="styles.css" rel="stylesheet">
+    <script src="vue.global.prod.js"></script>
+</head>
+<body class="body-window" id="body-ID">
+    <div class="root-window" id="root-ID">
+        <div class="initial-page-window" v-if="pageName == 'initialPage'">  
+
+            <div class="title-window">
+                <div class="title-text-large">
+                    URC
+                </div>
+                <div class="title-text-small">
+                    Universal Remote Control
+                </div>
+            </div>
+
+            <div class="vector-remote-image-window">
+                <img class="vector-remote-image" src="background_image.jpg">
+            </div>   
+            
+            <div class="initial-page-buttons-window">
+                <button class="initial-page-buttons" @click="goToRemoteSelectionPage()">Use a configured remote</button>
+                <button class="initial-page-buttons" @click="goToNewRemoteScanningPage()">Scan a new remote</button>
+            </div>
+        </div>
+
+        <div class="remote-selection-page-window" v-if="pageName == 'remoteSelectionPage'">
+            <div class="title-window">
+                <div class="title-text-large">
+                    Remote Selection
+                </div>
+                <div class="title-text-small">
+                    Choose a remote from the list
+                </div>
+            </div>
+
+            <div class="remote-selection-list-window">
+                <ul class="remote-selection-list" v-html="remoteItemHTMLList"> 
+                </ul>
+            </div>
+
+            <div class="remote-selection-page-buttons-window">
+                <button class="remote-selection-page-buttons" @click="getAllConfiguredRemotes()">Refresh List</button>
+                <button class="remote-selection-page-buttons" @click="goToInitialPage()">Back</button>
+            </div>
+        </div>
+
+        <div class="remote-transmission-page-window" v-if="pageName == 'remoteTransmissionPage'">
+            <div class="title-window">
+                <div class="title-text-large">
+                    IR Remote Transmission
+                </div>
+    
+                <div class="title-text-small">
+                    Press any button to transmit its command in IR
+                </div>
+            </div>
+
+            <div class="remote-transmission-status-window">
+                <div class="remote-transmission-remote-status-heading-window">
+                    <div class="remote-transmission-remote-status-heading">
+                        Remote Name:
+                    </div>
+
+                    <div class="remote-transmission-remote-status-heading">
+                        Receiver Name:
+                    </div>
+
+                    <div class="remote-transmission-remote-status-heading">
+                        Protocol:
+                    </div>
+
+                    <div class="remote-transmission-remote-status-heading">
+                        Button Pressed:
+                    </div>
+
+                    <div class="remote-transmission-remote-status-heading">
+                        Hex Code Sent:
+                    </div>                    
+                </div>
+
+                <div class="remote-transmission-remote-status-values-window">
+                    <div class="remote-transmission-remote-status-values">
+                        {{ remoteTransmissionRemoteName }}
+                    </div>
+    
+                    <div class="remote-transmission-remote-status-values">
+                        {{ remoteTransmissionReceiverName }}
+                    </div>
+    
+                    <div class="remote-transmission-remote-status-values">
+                        {{ remoteTransmissionProtocol }}
+                    </div>
+    
+                    <div class="remote-transmission-remote-status-values">
+                        {{ remoteTransmissionButtonPressedName }}
+                    </div>
+    
+                    <div class="remote-transmission-remote-status-values">
+                        {{ remoteTransmissionCommandSent }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="remote-buttons-window">
+                <div class="left-remote-buttons-window">
+                    <button class="remote-transmission-buttons" @click="transmitIRData('buttonOneName', 'buttonOneCommand')">{{ selectedRemote.buttonOneName }}</button>
+                    <button class="remote-transmission-buttons" @click="transmitIRData('buttonTwoName', 'buttonTwoCommand')">{{ selectedRemote.buttonTwoName }}</button>
+                    <button class="remote-transmission-buttons" @click="transmitIRData('buttonThreeName', 'buttonThreeCommand')">{{ selectedRemote.buttonThreeName }}</button>
+                    <button class="remote-transmission-buttons" @click="transmitIRData('buttonFourName', 'buttonFourCommand')">{{ selectedRemote.buttonFourName }}</button>
+                </div>
+    
+                <div class="right-remote-buttons-window">
+                    <button class="remote-transmission-buttons" @click="transmitIRData('buttonFiveName', 'buttonFiveCommand')">{{ selectedRemote.buttonFiveName }}</button>
+                    <button class="remote-transmission-buttons" @click="transmitIRData('buttonSixName', 'buttonSixCommand')">{{ selectedRemote.buttonSixName }}</button>
+                    <button class="remote-transmission-buttons" @click="transmitIRData('buttonSevenName', 'buttonSevenCommand')">{{ selectedRemote.buttonSevenName }}</button>
+                    <button class="remote-transmission-buttons" @click="transmitIRData('buttonEightName', 'buttonEightCommand')">{{ selectedRemote.buttonEightName }}</button>
+                </div>
+            </div>    
+            
+
+            <div class="remote-transmission-page-buttons-window">
+                <button class="remote-transmission-page-buttons" @click="goToRemoteSelectionPage()">Back</button>
+            </div>
+        </div>
+                
+        <div class="new-remote-scanning-page-window" v-if="pageName == 'newRemoteScanningPage'">
+            <div class="title-window">
+                <div class="title-text-large">
+                    Scan New Remote
+                </div>
+    
+                <div class="title-text-small">
+                    Scan the IR code or enter the command manually
+                </div>
+            </div>
+
+            <div class="buttons-configuration-window">
+                <div class="left-buttons-configuration-window">
+                    <div class="single-button-configuration-window">
+                        <div class="button-name-heading">Button 1 Name</div>
+
+                        <input class="button-name-text-input" type="search" placeholder="name" v-model="newRemoteConfigurationObject.buttonOneName">
+
+                        <div class="command-heading-and-scan-button-window">
+                            <div class="command-heading">Command</div>
+
+                            <button class="command-scan-buttons" @click="receiveIRData('buttonOneName', 'buttonOneCommand')">Scan</button>
+                        </div>
+
+                        <input class="command-text-input" type="search" placeholder="command" v-model="newRemoteConfigurationObject.buttonOneCommand">
+                    </div>
+
+                    <div class="single-button-configuration-window">
+                        <div class="button-name-heading">Button 2 Name</div>
+
+                        <input class="button-name-text-input" type="search" placeholder="name" v-model="newRemoteConfigurationObject.buttonTwoName">
+
+                        <div class="command-heading-and-scan-button-window">
+                            <div class="command-heading">Command</div>
+
+                            <button class="command-scan-buttons" @click="receiveIRData('buttonTwoName', 'buttonTwoCommand')">Scan</button>
+                        </div>
+
+                        <input class="command-text-input" type="search" placeholder="command" v-model="newRemoteConfigurationObject.buttonTwoCommand">
+                    </div>
+
+                    <div class="single-button-configuration-window">
+                        <div class="button-name-heading">Button 3 Name</div>
+
+                        <input class="button-name-text-input" type="search" placeholder="name" v-model="newRemoteConfigurationObject.buttonThreeName">
+
+                        <div class="command-heading-and-scan-button-window">
+                            <div class="command-heading">Command</div>
+
+                            <button class="command-scan-buttons" @click="receiveIRData('buttonThreeName', 'buttonThreeCommand')">Scan</button>
+                        </div>
+
+                        <input class="command-text-input" type="search" placeholder="command" v-model="newRemoteConfigurationObject.buttonThreeCommand">
+                    </div>
+
+                    <div class="single-button-configuration-window">
+                        <div class="button-name-heading">Button 4 Name</div>
+
+                        <input class="button-name-text-input" type="search" placeholder="name" v-model="newRemoteConfigurationObject.buttonFourName">
+
+                        <div class="command-heading-and-scan-button-window">
+                            <div class="command-heading">Command</div>
+
+                            <button class="command-scan-buttons" @click="receiveIRData('buttonFourName', 'buttonFourCommand')">Scan</button>
+                        </div>
+
+                        <input class="command-text-input" type="search" placeholder="command" v-model="newRemoteConfigurationObject.buttonFourCommand">
+                    </div>
+                </div>
+
+                <div class="right-buttons-configuration-window">
+                    <div class="single-button-configuration-window">
+                        <div class="button-name-heading">Button 5 Name</div>
+
+                        <input class="button-name-text-input" type="search" placeholder="name" v-model="newRemoteConfigurationObject.buttonFiveName">
+
+                        <div class="command-heading-and-scan-button-window">
+                            <div class="command-heading">Command</div>
+
+                            <button class="command-scan-buttons" @click="receiveIRData('buttonFiveName', 'buttonFiveCommand')">Scan</button>
+                        </div>
+
+                        <input class="command-text-input" type="search" placeholder="command" v-model="newRemoteConfigurationObject.buttonFiveCommand">
+                    </div>
+
+                    <div class="single-button-configuration-window">
+                        <div class="button-name-heading">Button 6 Name</div>
+
+                        <input class="button-name-text-input" type="search" placeholder="name" v-model="newRemoteConfigurationObject.buttonSixName">
+
+                        <div class="command-heading-and-scan-button-window">
+                            <div class="command-heading">Command</div>
+
+                            <button class="command-scan-buttons" @click="receiveIRData('buttonSixName', 'buttonSixCommand')">Scan</button>
+                        </div>
+
+                        <input class="command-text-input" type="search" placeholder="command" v-model="newRemoteConfigurationObject.buttonSixCommand">
+                    </div>
+
+                    <div class="single-button-configuration-window">
+                        <div class="button-name-heading">Button 7 Name</div>
+
+                        <input class="button-name-text-input" type="search" placeholder="name" v-model="newRemoteConfigurationObject.buttonSevenName">
+
+                        <div class="command-heading-and-scan-button-window">
+                            <div class="command-heading">Command</div>
+
+                            <button class="command-scan-buttons" @click="receiveIRData('buttonSevenName', 'buttonSevenCommand')">Scan</button>
+                        </div>
+
+                        <input class="command-text-input" type="search" placeholder="command" v-model="newRemoteConfigurationObject.buttonSevenCommand">
+                    </div>
+
+                    <div class="single-button-configuration-window">
+                        <div class="button-name-heading">Button 8 Name</div>
+
+                        <input class="button-name-text-input" type="search" placeholder="name" v-model="newRemoteConfigurationObject.buttonEightName">
+
+                        <div class="command-heading-and-scan-button-window">
+                            <div class="command-heading">Command</div>
+
+                            <button class="command-scan-buttons" @click="receiveIRData('buttonEightName', 'buttonEightCommand')">Scan</button>
+                        </div>
+
+                        <input class="command-text-input" type="search" placeholder="command" v-model="newRemoteConfigurationObject.buttonEightCommand">
+                    </div>
+                </div>
+            </div> 
+
+            <div class="new-remote-protocol-window">
+                <div class="new-remote-protocol-heading-window">
+                    <div class="new-remote-protocol-heading">
+                        Protocol:
+                    </div>                 
+                </div>
+
+                <div class="new-remote-protocol-select-menu-window">
+                    <select class="new-remote-protocol-select-menu" v-model="newRemoteConfigurationObject.protocolIR">
+                        <option disabled value="Choose">Choose</option>
+                        <option value="NEC">NEC</option>
+                        <option value="Samsung">Samsung</option>
+                        <option value="Sony">Sony</option>
+                        <option value="Panasonic">Panasonic</option>
+                        <option value="Philips">Philips</option>
+                        <option value="LG">LG</option>
+                        <option value="JVC">JVC</option>
+                        <option value="Sharp">Sharp</option>
+                        <option value="Kaseikyo">Kaseikyo</option>
+                        <!--<option value="Pulse Distance">Pulse Distance</option>-->
+                        </select>
+                </div>
+            </div>
+
+            <div class="new-remote-scanning-page-buttons-window">
+                <button class="new-remote-scanning-page-buttons" @click="goToNewRemoteSavingPage()">Next</button>
+                <button class="new-remote-scanning-page-buttons" @click="goToInitialPage()">Back</button>
+            </div>
+        </div>
+
+        <div class="new-remote-saving-page-window" v-if="pageName == 'newRemoteSavingPage'">
+            <div class="title-window">
+                <div class="title-text-large">
+                    Save New Remote
+                </div>
+    
+                <div class="title-text-small">
+                    Make sure no fields are left empty
+                </div>
+            </div>
+
+            <div class="new-remote-information-window">
+                <div class="new-remote-information-heading-window">
+                    <div class="new-remote-information-heading">
+                        Remote Name:
+                    </div>
+
+                    <div class="new-remote-information-heading">
+                        Receiver Name:
+                    </div>
+
+                    <div class="new-remote-information-heading">
+                        Receiver Address:
+                    </div>
+                </div>
+
+                <div class="new-remote-information-value-window">
+                    <div class="new-remote-information-text-input-window">
+                        <input class="new-remote-information-text-input" type="search" placeholder="name" v-model="newRemoteConfigurationObject.remoteName">
+                    </div>
+    
+                    <div class="new-remote-information-text-input-window">
+                        <input class="new-remote-information-text-input" type="search" placeholder="name" v-model="newRemoteConfigurationObject.receiverName">
+                    </div>
+
+                    <div class="new-remote-information-text-input-window">
+                        <input class="new-remote-information-text-input" type="search" placeholder="address" v-model="newRemoteConfigurationObject.receiverAddress">
+                    </div>
+                </div>
+            </div>
+
+            <div class="empty-input-fields-status-alert-window">
+                {{ remoteConfigurationSaveStatusAlert }}
+            </div>
+
+            <div class="new-remote-saving-page-buttons-window">
+                <button class="new-remote-saving-page-buttons" @click="sendNewRemoteConfigurationToServer()">Save</button>
+                <button class="new-remote-saving-page-buttons" @click="goToNewRemoteScanningPage()">Back</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="index.js"></script>
+</body>
+</html>
+
